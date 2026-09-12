@@ -1,17 +1,13 @@
-//
-//  ClockedApp.swift
-//  Clocked
-//
-//  Created by Sumangala Rao on 12/9/2026.
-//
-
 import SwiftUI
 
 @main
 struct ClockedApp: App {
+    /// Built once for the life of the app, then handed down to the screens.
+    @State private var dependencies = AppDependencies.withSampleData()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FortnightMeterScreen(dependencies: dependencies)
         }
     }
 }

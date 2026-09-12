@@ -27,6 +27,7 @@
 		3712DC453054C36600005B8E /* Clocked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clocked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3712DC523054C36800005B8E /* ClockedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClockedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3712DC5C3054C36800005B8E /* ClockedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClockedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3712DD9830560D3600005B8E /* Clocked.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = Clocked.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		3712DC3C3054C36600005B8E = {
 			isa = PBXGroup;
 			children = (
+				3712DD9830560D3600005B8E /* Clocked.xctestplan */,
 				3712DC473054C36600005B8E /* Clocked */,
 				3712DC553054C36800005B8E /* ClockedTests */,
 				3712DC5F3054C36800005B8E /* ClockedUITests */,

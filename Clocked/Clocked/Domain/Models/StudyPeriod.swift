@@ -1,3 +1,9 @@
+//
+//  StudyPeriod.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 3/9/2026.
+//
 import Foundation
 
 /// Whether the course is running or on a scheduled break.

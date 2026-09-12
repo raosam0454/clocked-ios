@@ -1,3 +1,9 @@
+//
+//  WorkedHours.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 1/9/2026.
+//
 import Foundation
 
 /// An amount of work time in hours, the unit the visa limit is written in.

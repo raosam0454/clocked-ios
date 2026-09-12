@@ -1,3 +1,9 @@
+//
+//  WorkShift.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 3/9/2026.
+//
 import Foundation
 
 /// A block of work at one employer, either already worked or accepted for a future date.

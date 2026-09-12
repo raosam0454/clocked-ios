@@ -1,3 +1,9 @@
+//
+//  Identifiers.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 1/9/2026.
+//
 import Foundation
 
 /// Identifies one employer.

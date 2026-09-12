@@ -1,3 +1,9 @@
+//
+//  CourseCalendar.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 3/9/2026.
+//
 import Foundation
 
 /// The study periods the student has entered, used to decide whether a given date is limited.

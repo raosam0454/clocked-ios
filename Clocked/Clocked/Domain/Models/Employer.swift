@@ -1,3 +1,9 @@
+//
+//  Employer.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 1/9/2026.
+//
 import Foundation
 
 /// One venue the student works for, for example a cafe or a pub.

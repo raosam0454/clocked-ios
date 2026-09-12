@@ -1,3 +1,9 @@
+//
+//  WorkEngagementType.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 1/9/2026.
+//
 import Foundation
 
 /// What kind of work a shift is, which decides whether its hours count toward the visa limit.

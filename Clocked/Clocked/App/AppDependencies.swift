@@ -51,6 +51,13 @@ final class AppDependencies {
                                   calendar: calendar)
     }
 
+    func makeExportWorkRecordUseCase() -> ExportWorkRecordUseCase {
+        ExportWorkRecordUseCase(shiftRepository: shiftRepository,
+                                employerRepository: employerRepository,
+                                courseCalendarRepository: courseCalendarRepository,
+                                calendar: calendar)
+    }
+
     /// A student partway through a semester, so the app has something to show on first launch.
     ///
     /// Stands in for real storage until it arrives.

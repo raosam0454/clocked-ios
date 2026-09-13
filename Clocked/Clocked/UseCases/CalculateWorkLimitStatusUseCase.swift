@@ -1,3 +1,9 @@
+//
+//  CalculateWorkLimitStatusUseCase.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 10/9/2026.
+//
 import Foundation
 
 /// Why the meter cannot be shown.

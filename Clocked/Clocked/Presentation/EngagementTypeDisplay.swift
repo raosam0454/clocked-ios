@@ -25,3 +25,13 @@ extension WorkEngagementType {
         }
     }
 }
+
+/// Wording for the two kinds of study period.
+extension StudyMode {
+    var studentFacingLabel: String {
+        switch self {
+        case .inSession: return "In session"
+        case .courseBreak: return "Course break"
+        }
+    }
+}

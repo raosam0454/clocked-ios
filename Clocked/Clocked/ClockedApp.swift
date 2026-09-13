@@ -7,7 +7,7 @@ struct ClockedApp: App {
 
     var body: some Scene {
         WindowGroup {
-            FortnightMeterScreen(dependencies: dependencies)
+            RootScreen(dependencies: dependencies)
         }
     }
 }

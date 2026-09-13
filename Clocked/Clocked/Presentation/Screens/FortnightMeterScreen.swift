@@ -19,10 +19,10 @@ struct FortnightMeterScreen: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     if let problem = viewModel.problem {
-                        needsSetup(problem)
+                        needsSetup(problem).clockedCard()
                     } else {
-                        meter
-                        breakdown
+                        meter.clockedCard()
+                        breakdown.clockedCard()
                         Text(viewModel.interpretationText)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
@@ -31,6 +31,7 @@ struct FortnightMeterScreen: View {
                 .padding()
             }
             .navigationTitle("This fortnight")
+            .clockedBackground()
             .onAppear { viewModel.refresh() }
         }
     }
@@ -46,11 +47,11 @@ struct FortnightMeterScreen: View {
             }
 
             ProgressView(value: viewModel.fillFraction)
-                .tint(color(for: viewModel.tone))
+                .tint(viewModel.tone.color)
 
             Text(viewModel.remainingText)
                 .font(.headline)
-                .foregroundStyle(color(for: viewModel.tone))
+                .foregroundStyle(viewModel.tone.color)
 
             Text(viewModel.windowText)
                 .font(.subheadline)
@@ -86,14 +87,6 @@ struct FortnightMeterScreen: View {
                 .font(.title2.bold())
             Text(message)
                 .foregroundStyle(.secondary)
-        }
-    }
-
-    private func color(for tone: MeterTone) -> Color {
-        switch tone {
-        case .safe: return .green
-        case .warning: return .orange
-        case .breach: return .red
         }
     }
 }

@@ -62,11 +62,17 @@ final class FortnightMeterViewModel {
         }
     }
 
-    var windowText: String {
+    /// The number in the middle of the ring, for example "34/48".
+    var meterValueText: String {
+        "\(hoursUsedText)/\(capText)"
+    }
+
+    /// Just the dates, since the ring card already labels them.
+    var windowRangeText: String {
         guard let window = status?.tightest.window else { return "" }
-        let first = window.firstDay.formatted(.dateTime.day().month(.abbreviated))
-        let last = window.lastDay.formatted(.dateTime.day().month(.abbreviated))
-        return "Tightest fortnight \(first) to \(last)"
+        let first = window.firstDay.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated))
+        let last = window.lastDay.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated))
+        return "\(first) to \(last)"
     }
 
     var interpretationText: String {

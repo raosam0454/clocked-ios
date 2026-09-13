@@ -5,33 +5,33 @@
 //  Created by Sumangala Rao on 9/9/2026.
 //
 import SwiftUI
-import UIKit
 
-/// The app's colours, in one place.
+/// The app's colours, type styles and panel style, in one place.
 ///
-/// Deep navy on a cool off white: the palette compliance and government products use, because
-/// it reads as steady rather than exciting. Green, amber and red are reserved for the verdict,
-/// and are muted so they carry meaning rather than decoration.
+/// A light reading of the pitch deck: the same navy, periwinkle and signal colours, inverted
+/// onto a pale blue grey ground. Cards are separated by a thin border rather than a shadow, and
+/// labels are monospaced and letter spaced, which is what gives the deck its steady, technical
+/// feel.
 enum ClockedTheme {
-    /// The page behind everything.
-    static let canvas = adaptive(light: 0xE6EDF4, dark: 0x0E1418)
+    static let canvas = Color(red: 0.914, green: 0.937, blue: 0.965)
 
-    /// Cards and rows that sit on the canvas.
-    static let surface = adaptive(light: 0xFFFFFF, dark: 0x18212B)
+    /// Cards sitting on the canvas.
+    static let surface = Color.white
+    static let cardBorder = Color(red: 0.804, green: 0.847, blue: 0.894)
 
-    /// Buttons, links and selected controls.
-    static let accent = adaptive(light: 0x14385C, dark: 0x8FBBE6)
+    /// Deep navy, the colour headings and numbers are set in.
+    static let ink = Color(red: 0.051, green: 0.082, blue: 0.125)
+    static let secondaryInk = Color(red: 0.360, green: 0.420, blue: 0.494)
 
-    static let safe = adaptive(light: 0x2E7D5B, dark: 0x5FCF9E)
-    static let warning = adaptive(light: 0xB26B00, dark: 0xE0A34A)
-    static let breach = adaptive(light: 0xB3261E, dark: 0xF2837B)
+    /// Periwinkle from the deck, darkened enough to sit on white.
+    static let accent = Color(red: 0.239, green: 0.388, blue: 0.659)
 
-    /// Picks a colour per appearance, so dark mode works without a second code path.
-    private static func adaptive(light: UInt, dark: UInt) -> Color {
-        Color(uiColor: UIColor { traits in
-            UIColor(hex: traits.userInterfaceStyle == .dark ? dark : light)
-        })
-    }
+    /// The unfilled part of the meter ring.
+    static let ringTrack = Color(red: 0.859, green: 0.890, blue: 0.925)
+
+    static let safe = Color(red: 0.122, green: 0.541, blue: 0.341)
+    static let warning = Color(red: 0.824, green: 0.322, blue: 0.122)
+    static let breach = Color(red: 0.702, green: 0.149, blue: 0.118)
 }
 
 extension MeterTone {
@@ -42,9 +42,44 @@ extension MeterTone {
         case .breach: return ClockedTheme.breach
         }
     }
+
+    /// Short word for the verdict banner, so colour is never the only signal.
+    var bannerText: String {
+        switch self {
+        case .safe: return "OK"
+        case .warning: return "! CLOSE"
+        case .breach: return "! OVER"
+        }
+    }
 }
 
-/// Puts every screen on the same background.
+// MARK: - Styles
+
+/// Small uppercase monospaced label, the deck's section heading.
+private struct MonoLabel: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.system(.caption, design: .monospaced))
+            .tracking(2)
+            .textCase(.uppercase)
+            .foregroundStyle(ClockedTheme.secondaryInk)
+    }
+}
+
+/// A panel on the canvas: white, thin border, no shadow.
+private struct ClockedCard: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(ClockedTheme.surface, in: RoundedRectangle(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .strokeBorder(ClockedTheme.cardBorder, lineWidth: 1)
+            )
+    }
+}
+
 private struct ClockedBackground: ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -53,32 +88,8 @@ private struct ClockedBackground: ViewModifier {
     }
 }
 
-/// A panel sitting on the canvas: white in light mode, slate in dark.
-private struct ClockedCard: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(ClockedTheme.surface, in: RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.06), radius: 8, y: 2)
-    }
-}
-
 extension View {
-    func clockedBackground() -> some View {
-        modifier(ClockedBackground())
-    }
-
-    func clockedCard() -> some View {
-        modifier(ClockedCard())
-    }
-}
-
-private extension UIColor {
-    convenience init(hex: UInt) {
-        self.init(red: CGFloat((hex >> 16) & 0xFF) / 255,
-                  green: CGFloat((hex >> 8) & 0xFF) / 255,
-                  blue: CGFloat(hex & 0xFF) / 255,
-                  alpha: 1)
-    }
+    func monoLabel() -> some View { modifier(MonoLabel()) }
+    func clockedCard() -> some View { modifier(ClockedCard()) }
+    func clockedBackground() -> some View { modifier(ClockedBackground()) }
 }

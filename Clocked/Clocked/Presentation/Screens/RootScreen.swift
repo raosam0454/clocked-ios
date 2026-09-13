@@ -19,6 +19,9 @@ struct RootScreen: View {
                 .tabItem { Label("Check a shift", systemImage: "questionmark.circle") }
         }
         .tint(ClockedTheme.accent)
+        // The palette is a light reading of the pitch deck. Locking the appearance keeps it
+        // intact until a dark variant is designed properly.
+        .preferredColorScheme(.light)
     }
 }
 

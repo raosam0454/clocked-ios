@@ -17,18 +17,19 @@ struct FortnightMeterScreen: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 24) {
+                VStack(alignment: .leading, spacing: 16) {
                     if let problem = viewModel.problem {
                         needsSetup(problem).clockedCard()
                     } else {
-                        meter.clockedCard()
-                        breakdown.clockedCard()
+                        meterCard
+                        breakdownCard
                         Text(viewModel.interpretationText)
                             .font(.footnote)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(ClockedTheme.secondaryInk)
+                            .padding(.horizontal, 4)
                     }
                 }
-                .padding()
+                .padding(16)
             }
             .navigationTitle("This fortnight")
             .clockedBackground()
@@ -36,57 +37,62 @@ struct FortnightMeterScreen: View {
         }
     }
 
-    private var meter: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text(viewModel.hoursUsedText)
-                    .font(.system(size: 56, weight: .semibold, design: .rounded))
-                Text("of \(viewModel.capText) hours")
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-            }
+    private var meterCard: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("In session")
+                .monoLabel()
 
-            ProgressView(value: viewModel.fillFraction)
-                .tint(viewModel.tone.color)
+            MeterRing(fraction: viewModel.fillFraction,
+                      tone: viewModel.tone,
+                      value: viewModel.meterValueText,
+                      caption: "hours")
+                .frame(maxWidth: .infinity)
 
             Text(viewModel.remainingText)
                 .font(.headline)
                 .foregroundStyle(viewModel.tone.color)
+                .frame(maxWidth: .infinity, alignment: .center)
 
-            Text(viewModel.windowText)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+            VStack(spacing: 2) {
+                Text("Tightest window").monoLabel()
+                Text(viewModel.windowRangeText)
+                    .font(.subheadline)
+                    .monospacedDigit()
+                    .foregroundStyle(ClockedTheme.ink)
+            }
+            .frame(maxWidth: .infinity)
         }
+        .clockedCard()
     }
 
-    private var breakdown: some View {
+    private var breakdownCard: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Counted toward the cap")
-                .font(.headline)
+            Text("Counted toward the cap").monoLabel()
 
             if viewModel.employers.isEmpty {
                 Text("No shifts recorded in this fortnight yet.")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(ClockedTheme.secondaryInk)
             } else {
                 ForEach(viewModel.employers, id: \.employerID) { employer in
                     HStack {
                         Text(employer.tradingName)
+                            .foregroundStyle(ClockedTheme.ink)
                         Spacer()
                         Text("\(employer.hours.value.formatted(.number.precision(.fractionLength(0...1))))h")
                             .monospacedDigit()
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(ClockedTheme.secondaryInk)
                     }
                 }
             }
         }
+        .clockedCard()
     }
 
     private func needsSetup(_ message: String) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Set up your term dates")
-                .font(.title2.bold())
+            Text("Set up your term dates").monoLabel()
             Text(message)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(ClockedTheme.ink)
         }
     }
 }

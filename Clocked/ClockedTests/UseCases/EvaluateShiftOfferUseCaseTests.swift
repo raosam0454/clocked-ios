@@ -90,7 +90,7 @@ final class EvaluateShiftOfferUseCaseTests: XCTestCase {
         let offer = ShiftOffer(employerID: cafe.id,
                                period: Fixtures.period(2026, 3, 10, from: 9, hours: 12))
 
-        let assessment = try useCase.execute(offer)
+        _ = try useCase.execute(offer)
 
 //        XCTAssertEqual(assessment.tightest.countedHours.value, 0, accuracy: 0.001)
     }

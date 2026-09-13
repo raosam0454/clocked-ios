@@ -10,7 +10,7 @@ import Foundation
 ///
 /// The work limit applies only while the course is in session. During a scheduled break there
 /// is no limit, and students often miss that.
-enum StudyMode: String, Codable {
+enum StudyMode: String, Codable, CaseIterable {
     case inSession
     case courseBreak
 }

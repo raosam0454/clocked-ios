@@ -1,3 +1,9 @@
+//
+//  WorkLimitStatus.swift
+//  Clocked
+//
+//  Created by Sumangala Rao on 10/9/2026.
+//
 import Foundation
 
 /// Hours worked at one employer, inside whichever window is being reported.

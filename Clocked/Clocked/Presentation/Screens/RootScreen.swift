@@ -2,7 +2,7 @@
 //  RootScreen.swift
 //  Clocked
 //
-//  Created by Sumangala Rao on 9/9/2026.
+//  Created by Sumangala Rao on 10/9/2026.
 //
 import SwiftUI
 
@@ -17,6 +17,12 @@ struct RootScreen: View {
 
             ShiftOfferCheckScreen(dependencies: dependencies)
                 .tabItem { Label("Check a shift", systemImage: "questionmark.circle") }
+
+            RecordShiftScreen(dependencies: dependencies)
+                .tabItem { Label("Add shift", systemImage: "plus.circle") }
+
+            WorkRecordScreen(dependencies: dependencies)
+                .tabItem { Label("Record", systemImage: "list.bullet.rectangle") }
         }
         .tint(ClockedTheme.accent)
         // The palette is a light reading of the pitch deck. Locking the appearance keeps it
